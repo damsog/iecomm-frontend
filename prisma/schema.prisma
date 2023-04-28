@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  workspaceId String
+  name        String
+  description String?
+  lft         Int
+  rgt         Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  Item        Item[]
+
+  @@index([workspaceId], map: "Category_workspaceId_fkey")
+}
+
+model CompanyAccount {
+  id            String      @id @default(cuid())
+  name          String?     @unique
+  email         String      @unique
+  password      String
+  firstName     String?
+  lastName      String?
+  image         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  apiKey        String?     @unique
+  emailVerified DateTime?
+  Workspace     Workspace[]
+}
+
+model IAM {
+  id          String    @id @default(cuid())
+  workspaceId String
+  password    String
+  role        IAM_role  @default(USER)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tagname     String?
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  @@index([workspaceId], map: "IAM_workspaceId_fkey")
+}
+
+model Item {
+  id                String    @id @default(cuid())
+  workspaceId       String
+  categoryId        String
+  locationId        String?
+  barcode           String?
+  serialNumber      String?
+  quantity          Int
+  name              String
+  description       String?
+  wholeSalePriceInd Float?
+  retailPriceInd    Float?
+  wholeSalePrice    Float?
+  retailPrice       Float?
+  length            Float?
+  width             Float?
+  height            Float?
+  weight            Float?
+  forSale           Boolean
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  typeId            String
+  Category          Category  @relation(fields: [categoryId], references: [id])
+  Location          Location? @relation(fields: [locationId], references: [id])
+  Type              Type      @relation(fields: [typeId], references: [id])
+  Workspace         Workspace @relation(fields: [workspaceId], references: [id])
+
+  @@index([categoryId], map: "Item_categoryId_fkey")
+  @@index([locationId], map: "Item_locationId_fkey")
+  @@index([typeId], map: "Item_typeId_fkey")
+  @@index([workspaceId], map: "Item_workspaceId_fkey")
+}
+
+model Location {
+  id          String    @id @default(cuid())
+  workspaceId String
+  name        String
+  address     String?
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Item        Item[]
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  @@index([workspaceId], map: "Location_workspaceId_fkey")
+}
+
+model Type {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Item      Item[]
+}
+
+model Workspace {
+  id             String         @id @default(cuid())
+  userId         String
+  name           String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  Category       Category[]
+  IAM            IAM[]
+  Item           Item[]
+  Location       Location[]
+  CompanyAccount CompanyAccount @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "Workspace_userId_fkey")
+}
+
+enum IAM_role {
+  USER
+  ADMIN
+}
