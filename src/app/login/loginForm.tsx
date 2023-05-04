@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AiFillGithub } from 'react-icons/ai';
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from 'react';
 
 interface LoginFormClassOptions {
@@ -16,6 +17,7 @@ interface LoginFormOptions {
 }
 
 const LoginForm = ({className}: LoginFormClassOptions) => {
+    const { data: session, status } = useSession();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginFormOptions>();
     const router = useRouter();
 
@@ -55,7 +57,7 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
                     </div>
                 </div>
                 <div className='px-4 my-2'>
-                    <h1 className='text-gray-400 '>Don't have an account? <span className='text-cyan-600 hover:text-cyan-500 hover:cursor-pointer' onClick={redirectToSignup}>sign-up!</span></h1>
+                    <h1 className="text-gray-400 ">Don\'t have an account? <span className="text-cyan-600 hover:text-cyan-500 hover:cursor-pointer" onClick={redirectToSignup}>sign-up!</span></h1>
                 </div>
             </form>
         </div>
