@@ -3,6 +3,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { AiFillGithub } from 'react-icons/ai';
+import { IoLogoGoogle } from 'react-icons/io';
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from 'react';
@@ -57,12 +58,13 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
                 </div>
                 <div className='px-4 flex flex-col items-center justify-center'>
                     <h5 className='text-gray-400'>Or Sign In using</h5>
-                    <div className='my-2 flex'>
+                    <div className='my-2 flex space-x-4'>
                         <h5 className=" text-4xl cursor-pointer text-gray-300 hover:text-cyan-600" onClick={() => signIn()}><AiFillGithub/></h5>
+                        <h5 className=" text-4xl cursor-pointer text-gray-300 hover:text-cyan-600" onClick={() => signIn()}><IoLogoGoogle/></h5>
                     </div>
                 </div>
                 <div className='px-4 my-2'>
-                    <h1 className="text-gray-400 ">Don\'t have an account? <span className="text-cyan-600 hover:text-cyan-500 hover:cursor-pointer" onClick={redirectToSignup}>sign-up!</span></h1>
+                    <h1 className="text-gray-400 ">Don't have an account? <span className="text-cyan-600 hover:text-cyan-500 hover:cursor-pointer" onClick={redirectToSignup}>sign-up!</span></h1>
                 </div>
             </form>
         </div>
