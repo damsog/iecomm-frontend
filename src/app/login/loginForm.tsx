@@ -21,6 +21,11 @@ const LoginForm = ({className}: LoginFormClassOptions) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginFormOptions>();
     const router = useRouter();
 
+    useEffect(() => {
+        if(status === "loading") return;
+        if(session) router.push("/main");
+    }, [session, status]);
+
     const onSubmit: SubmitHandler<LoginFormOptions> = data => console.log(data);
     const redirectToSignup = () => router.push('/signup');
  
