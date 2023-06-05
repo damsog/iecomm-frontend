@@ -1,3 +1,5 @@
+import TopBar from "./topBar"
+
 export default function RootLayout({
     children,
   }: {
@@ -5,6 +7,7 @@ export default function RootLayout({
   }) {
     return (
         <>
+          <TopBar />
           <div className=''>
               {/* Div Background */}
               {children}
