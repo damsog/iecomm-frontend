@@ -3,6 +3,7 @@ import React from 'react'
 import { MdDarkMode } from 'react-icons/md';
 import { IoLanguageSharp } from 'react-icons/io5';
 import { MdViewSidebar } from 'react-icons/md';
+import DropDownAccount from './DropDownAccont';
 
 function topBar() {
   return (
@@ -19,7 +20,9 @@ function topBar() {
                 <h5 className=" text-2xl cursor-pointer text-gray-300 hover:text-cyan-600"><MdDarkMode/></h5>
                 <h5 className=" text-2xl cursor-pointer text-gray-300 hover:text-cyan-600"><IoLanguageSharp/></h5>
                 {/* Logo. TODO: Substitute for dropdown */}
-                <h5 className=" text-2xl cursor-pointer text-gray-300 hover:text-cyan-600"><IoLanguageSharp/></h5>
+                <div className='flex items-center'>
+                    <DropDownAccount up={false}/>
+                </div>
             </div>
         </div>
     </div>
