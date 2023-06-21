@@ -26,7 +26,7 @@ const UserSettings = ({user}:SettingsProps) => {
                                 <div className="hidden lg:block w-1/12"></div>
                                 <div className="lg:w-1/2">
                                     <h3 className="text-2xl font-bold text-gray-200">About You</h3>
-                                    <hr className="py-2 border-green-700" />
+                                    <hr className="py-2 border-cyan-600" />
                                     <DisplayFormCard
                                         id={user.id}
                                         displayOption="Name"

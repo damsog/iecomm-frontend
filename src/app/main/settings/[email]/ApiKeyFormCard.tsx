@@ -48,15 +48,15 @@ const DisplayFormCard = ({id, displayOption, value, description, className}:Disp
                     {showing && (
                         <button 
                             className="px-4 py-2 text-gray-400 rounded-2xl
-                            border-green-700 shadow-md bg-[#2b2532] hover:text-gray-200 shadow-green-700/50 hover:bg-green-700" 
+                            border-cyan-600 shadow-md bg-[#2b2532] hover:text-gray-200 shadow-cyan-600/50 hover:bg-cyan-600" 
                          onClick={onGenerate}>Generate</button>
                     )}
                     <button type="button" onClick={onCancel} className="text-gray-300 mx-1 px-4 py-2 rounded-2xl
-                                border-green-700 shadow-md bg-[#2b2532] hover:text-gray-200
-                                shadow-green-700/50 hover:bg-[#3f3847]">{showing ? "Hide" : "Show"}</button>
+                                border-cyan-600 shadow-md bg-[#2b2532] hover:text-gray-200
+                                shadow-cyan-600/50 hover:bg-[#3f3847]">{showing ? "Hide" : "Show"}</button>
                 </div>
             </div>
-            <hr className="pb-2 border-green-700" />
+            <hr className="pb-2 border-cyan-600" />
             <p className=" text-sm text-gray-300 " >{description}</p>
         </div>
     );
