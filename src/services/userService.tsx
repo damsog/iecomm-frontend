@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 import prisma from "../lib/prisma";
 import { Encryptor } from "@/lib/encryptor";
+import crypto from 'crypto';
 
 export interface UserDataModel {
     username: string;
