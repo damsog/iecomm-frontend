@@ -1,7 +1,12 @@
-import React from 'react'
+'use client';
+
+import { Suspense } from 'react'
+import WorkspaceList from './WorkspaceList'
 
 export default function MainMenu() {
-  return (
-    <div className=' text-gray-300 '>MainMenu</div>
-  )
+    return (
+        <Suspense fallback={<div className="text-green-700">Loading...</div>}>
+          <WorkspaceList apiKey="works"/>
+        </Suspense>
+    )
 }
