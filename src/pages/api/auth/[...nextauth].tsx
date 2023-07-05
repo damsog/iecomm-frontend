@@ -3,6 +3,7 @@ import NextAuth, { NextAuthOptions } from "next-auth"
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "../../../lib/prisma";
+import userService from "../../../services/userService";
 
 export const authOptions:NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -24,12 +25,16 @@ export const authOptions:NextAuthOptions = {
         token.uid = user.id;
         token.email = user.email;
         //token.apikey = user.apiKey;
+        const userSaved = await userService.findById(user.id);
+        if(userSaved){
+          token.apikey = userSaved.apiKey;
+        }
       }
       return token;
     },
     async session({ session, token }) {
       if (session?.user) {
-        //session.apikey = token.apikey;
+        session.apikey = token.apikey as string;
         //session.userId = token.uid;
         //session.userEmail = token.email;
         //console.log('data: ' + JSON.stringify(session.apikey));
